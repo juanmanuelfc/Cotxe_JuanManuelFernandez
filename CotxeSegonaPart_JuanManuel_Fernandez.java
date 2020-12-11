@@ -2,7 +2,15 @@ package ExerciciCotxe;/*
 Hecho dia vie. 11/12/2020
 Creado por: Juanma
 Paquete: ExerciciCotxe
-Descripcion:
+Descripcion: A partir dels fitxers i enunciat de l'exercici PRU03E02, heu de crear una altra classe Cotxe fent
+una subclasse de la classe que féreu a PRU03E02, seguint la mateixa nomenclatura (CotxeSegonaPart_nom_llinatge),
+i que incorpori els mètodes CanviarMarxaAutomatic i CanviarMarxaManual. Els mètodes només poden funcionar si el
+cotxe és automàtic o manual, respectivament.
+Per canviar les marxes tant en un mètode com a l’altre, haureu de passar un char com a paràmetre. Concretament
+‘+’ o ‘-’ per indicar pujar o baixar marxa respectivament.
+El canvi automàtic ha d’implementar les marxes F,N,R i el manual R,N,1,2,3,4,5,6
+Els canvis seran seqüencials (no podem passar, per exemple, de 1 a 4 directament) i les marxes els heu d’implementar
+com a enum, tal i com vérem a l’exercici anterior.
 */
 
 public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Fernandez{
@@ -21,10 +29,12 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
     }
 
-    public void canviarMarxesAutomatic(char marxa) {
+    public void canviarMarxesAutomatic(char marxa) throws Exception {
         //************
         //------------CANVI AUTOMATIC
         //************
+        //Feim una seria de IF per a recorrer la l'enum del tipus de marxa en aquest cas
+        //del canvi manual, pujant i baixant passant un + o - de parametre
         if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.R && marxa == '+') {
             this.marxaAutomatic = CanviMarxesAutomatic.N;
         } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '+') {
@@ -34,12 +44,17 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '-') {
             this.marxaAutomatic = CanviMarxesAutomatic.R;
         }
+        else {
+            throw new Exception("Marxa no identificada");
+        }
     }
 
-    public void canviarMarxesManual(char marxa) {
+    public void canviarMarxesManual(char marxa) throws Exception {
         //************
         //------------CANVI MANUAL
         //************
+        //Feim una seria de IF per a recorrer la l'enum del tipus de marxa en aquest cas
+        //del canvi manual, pujant i baixant passant un + o - de parametre
         if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.R && marxa == '+') {
             this.marxaManual = CanviMarxesManual.N;
         } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '+') {
@@ -68,6 +83,9 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
             this.marxaManual = CanviMarxesManual.N;
         } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '-') {
             this.marxaManual = CanviMarxesManual.R;
+        }
+        else {
+            throw new Exception("Marxa no identificada");
         }
     }
 
