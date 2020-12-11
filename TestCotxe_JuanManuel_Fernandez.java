@@ -5,9 +5,11 @@ Paquete: ExerciciCotxe
 Descripcion:
 */
 
+import java.sql.SQLOutput;
+
 public class TestCotxe_JuanManuel_Fernandez {
     public static void main(String[] args) {
-        Cotxe_JuanManuel_Fernandez c1 = new Cotxe_JuanManuel_Fernandez("Wolkswagen", "Golf R", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat);
+        /*Cotxe_JuanManuel_Fernandez c1 = new Cotxe_JuanManuel_Fernandez("Wolkswagen", "Golf R", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat);
         System.out.println(c1.comprovaMotor());
         System.out.println(c1.marca);
         System.out.println(c1.model);
@@ -23,6 +25,15 @@ public class TestCotxe_JuanManuel_Fernandez {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
+
+        CotxeSegonaPart_JuanManuel_Fernandez c2 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Focus RS", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N);
+        System.out.println(c2.getMarxaAutomatic());
+        c2.canviarMarxesAutomatic('+');
+        System.out.println(c2.getMarxaAutomatic());
+        c2.canviarMarxesAutomatic('-');
+        System.out.println(c2.getMarxaAutomatic());
+        c2.canviarMarxesAutomatic('-');
+        System.out.println(c2.getMarxaAutomatic());
     }
 }
