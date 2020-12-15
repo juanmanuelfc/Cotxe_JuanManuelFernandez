@@ -28,29 +28,33 @@ public class TestCotxe_JuanManuel_Fernandez {
         }*/
 
         //-------PARTE 2
-        CotxeSegonaPart_JuanManuel_Fernandez c2 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Focus RS", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N);
+        CotxeSegonaPart_JuanManuel_Fernandez c2 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Focus RS", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
         try {
             System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxesAutomatic('+');
+            c2.canviarMarxaAutomatic('+');
             System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxesAutomatic('-');
+            c2.canviarMarxaAutomatic('-');
             System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxesAutomatic('-');
+            c2.canviarMarxaAutomatic('-');
             System.out.println(c2.getMarxaAutomatic());
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        CotxeSegonaPart_JuanManuel_Fernandez c3 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Mustang", TipusCanvi.CanviManual, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N);
+        CotxeSegonaPart_JuanManuel_Fernandez c3 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Mustang", TipusCanvi.CanviManual, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
         try {
+            c3.fermarCinturo();
+            System.out.println(c3.getCinturo());
             System.out.println(c3.getMarxaManual());
-            c3.canviarMarxesManual('+');
+            c3.canviarMarxaManual('+');
             System.out.println(c3.getMarxaManual());
-            c3.canviarMarxesManual('-');
+            c3.canviarMarxaManual('+');
             System.out.println(c3.getMarxaManual());
-            c3.canviarMarxesManual('-');
+            c3.canviarMarxaManual('-');
             System.out.println(c3.getMarxaManual());
+            c3.desfermarCinturo();
+            System.out.println(c3.getCinturo());
         }
         catch (Exception e){
             System.out.println(e.getMessage());

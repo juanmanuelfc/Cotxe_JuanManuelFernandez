@@ -16,9 +16,11 @@ com a enum, tal i com vérem a l’exercici anterior.
 public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Fernandez{
     protected CanviMarxesAutomatic marxaAutomatic;
     protected CanviMarxesManual marxaManual;
+    protected Cinturo cinturo;
 
-    public CotxeSegonaPart_JuanManuel_Fernandez(String marca, String model, TipusCanvi tipuscanvi, EstatsMotorCotxe estatCotxe, CanviMarxesAutomatic marxaAutomatic, CanviMarxesManual marxaManual){
+    public CotxeSegonaPart_JuanManuel_Fernandez(String marca, String model, TipusCanvi tipuscanvi, EstatsMotorCotxe estatCotxe, CanviMarxesAutomatic marxaAutomatic, CanviMarxesManual marxaManual, Cinturo cinturo){
         super(marca, model, tipuscanvi, estatCotxe);
+        this.cinturo = cinturo;
         if (tipuscanvi == TipusCanvi.CanviAutomatic){
             this.marxaAutomatic = marxaAutomatic;
             this.marxaManual = null;
@@ -29,7 +31,7 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
     }
 
-    public void canviarMarxesAutomatic(char marxa) throws Exception {
+    public void canviarMarxaAutomatic(char marxa) throws Exception {
         //************
         //------------CANVI AUTOMATIC
         //************
@@ -49,12 +51,12 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
     }
 
-    public void canviarMarxesManual(char marxa) throws Exception {
+    public void canviarMarxaManual(char marxa) throws Exception {
         //************
         //------------CANVI MANUAL
         //************
-        //Feim una seria de IF per a recorrer la l'enum del tipus de marxa en aquest cas
-        //del canvi manual, pujant i baixant passant un + o - de parametre
+        //Feim una serie de IF per a recorrer la l'enum del tipus de marxa en aquest cas
+        //del canvi manual, pujant i baixant passant un + o - per parametre
         if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.R && marxa == '+') {
             this.marxaManual = CanviMarxesManual.N;
         } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '+') {
@@ -86,6 +88,28 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
         else {
             throw new Exception("Marxa no identificada");
+        }
+    }
+
+    public void fermarCinturo() throws Exception{
+        if (this.cinturo == Cinturo.NoFermat){
+            this.cinturo = Cinturo.Fermat;
+        }
+        else {
+            throw new Exception("Ja tens el cinturo fermat");
+        }
+    }
+
+    public Cinturo getCinturo(){
+        return this.cinturo;
+    }
+
+    public void desfermarCinturo() throws Exception{
+        if (this.cinturo == Cinturo.Fermat){
+            this.cinturo = Cinturo.NoFermat;
+        }
+        else {
+            throw new Exception("Ja tens el cinturo desfermat");
         }
     }
 
