@@ -47,12 +47,14 @@ public class TestCotxe_JuanManuel_Fernandez {
             c3.fermarCinturo();
             System.out.println(c3.getCinturo());
             System.out.println(c3.getMarxaManual());
+            c3.arrancarMotor();
             c3.canviarMarxaManual('+');
             System.out.println(c3.getMarxaManual());
             c3.canviarMarxaManual('+');
             System.out.println(c3.getMarxaManual());
             c3.canviarMarxaManual('-');
             System.out.println(c3.getMarxaManual());
+            c3.aturarMotor();
             c3.desfermarCinturo();
             System.out.println(c3.getCinturo());
         }

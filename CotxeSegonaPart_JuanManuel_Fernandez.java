@@ -21,6 +21,10 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
     public CotxeSegonaPart_JuanManuel_Fernandez(String marca, String model, TipusCanvi tipuscanvi, EstatsMotorCotxe estatCotxe, CanviMarxesAutomatic marxaAutomatic, CanviMarxesManual marxaManual, Cinturo cinturo){
         super(marca, model, tipuscanvi, estatCotxe);
         this.cinturo = cinturo;
+        /*
+        Farem un if dins el constructor per a que si el cotxe es automàtic,
+        les marxes manuals quedaran nules, i a l'inreves.
+        */
         if (tipuscanvi == TipusCanvi.CanviAutomatic){
             this.marxaAutomatic = marxaAutomatic;
             this.marxaManual = null;
@@ -32,66 +36,91 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
     }
 
     public void canviarMarxaAutomatic(char marxa) throws Exception {
-        //************
-        //------------CANVI AUTOMATIC
-        //************
-        //Feim una seria de IF per a recorrer la l'enum del tipus de marxa en aquest cas
-        //del canvi manual, pujant i baixant passant un + o - de parametre
-        if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.R && marxa == '+') {
-            this.marxaAutomatic = CanviMarxesAutomatic.N;
-        } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '+') {
-            this.marxaAutomatic = CanviMarxesAutomatic.F;
-        } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.F && marxa == '-') {
-            this.marxaAutomatic = CanviMarxesAutomatic.N;
-        } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '-') {
-            this.marxaAutomatic = CanviMarxesAutomatic.R;
+        /*
+        ************
+        ------------CANVI AUTOMATIC
+        ************
+        *
+        Primer feim una condició de que el cotxe ha de estar encés, si no es podrà canviar
+        de marxa.
+        *
+        Feim una serie de IF per a recorrer l'enum del tipus de marxa corresponent, en aquest cas
+        del canvi automàtic, pujant i baixant passant un + o - de parametre.
+        */
+        if (this.estatCotxe == EstatsMotorCotxe.EnMarxa){
+            if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.R && marxa == '+') {
+                this.marxaAutomatic = CanviMarxesAutomatic.N;
+            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '+') {
+                this.marxaAutomatic = CanviMarxesAutomatic.F;
+            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.F && marxa == '-') {
+                this.marxaAutomatic = CanviMarxesAutomatic.N;
+            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '-') {
+                this.marxaAutomatic = CanviMarxesAutomatic.R;
+            }
+            else {
+                throw new Exception("Marxa no identificada");
+            }
         }
         else {
-            throw new Exception("Marxa no identificada");
+            throw new Exception("El cotxe no està encés.");
         }
     }
 
     public void canviarMarxaManual(char marxa) throws Exception {
-        //************
-        //------------CANVI MANUAL
-        //************
-        //Feim una serie de IF per a recorrer la l'enum del tipus de marxa en aquest cas
-        //del canvi manual, pujant i baixant passant un + o - per parametre
-        if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.R && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.N;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Primera;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Segona;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Tercera;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Quarta;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Quinta;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '+') {
-            this.marxaManual = CanviMarxesManual.Sexta;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Sexta && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.Quinta;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.Quarta;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.Tercera;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.Segona;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.Primera;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.N;
-        } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '-') {
-            this.marxaManual = CanviMarxesManual.R;
+        /*
+        ************
+        ------------CANVI MANUAL
+        ************
+        *
+        Mateixa primera condició que en el canvi de marxes manual, COMPROVACIÓ DE COTXE ENCÉS.
+        *
+        Feim una serie de IF per a recorrer la l'enum del tipus de marxa en aquest cas
+        del canvi manual, pujant i baixant passant un + o - per parametre.
+        */
+        if (this.estatCotxe == EstatsMotorCotxe.EnMarxa){
+            if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.R && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.N;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Primera;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Segona;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Tercera;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Quarta;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Quinta;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '+') {
+                this.marxaManual = CanviMarxesManual.Sexta;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Sexta && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.Quinta;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.Quarta;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.Tercera;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.Segona;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.Primera;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.N;
+            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '-') {
+                this.marxaManual = CanviMarxesManual.R;
+            }
+            else {
+                throw new Exception("Marxa no identificada.");
+            }
         }
         else {
-            throw new Exception("Marxa no identificada");
+            throw new Exception("El cotxe no està encés.");
         }
     }
 
     public void fermarCinturo() throws Exception{
+        /*
+        Farem un mètode per fermar-nos el cinturó de seguretat, fent una condició de que si
+        el cinturó no està fermat, el fermarem.
+         */
         if (this.cinturo == Cinturo.NoFermat){
             this.cinturo = Cinturo.Fermat;
         }
@@ -105,6 +134,9 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
     }
 
     public void desfermarCinturo() throws Exception{
+        /*
+        Mateix mètode de fermar-nos el cinturó de seguretat, pero ara per desfermar.
+         */
         if (this.cinturo == Cinturo.Fermat){
             this.cinturo = Cinturo.NoFermat;
         }
