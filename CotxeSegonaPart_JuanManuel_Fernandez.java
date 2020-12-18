@@ -13,6 +13,14 @@ Els canvis seran seqüencials (no podem passar, per exemple, de 1 a 4 directamen
 com a enum, tal i com vérem a l’exercici anterior.
 */
 
+enum CanviMarxesAutomatic {
+    F, N, R
+}
+
+enum CanviMarxesManual {
+    R, N, Primera, Segona, Tercera, Quarta, Quinta, Sexta
+}
+
 public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Fernandez{
     //Atributos de la clase CotxeSegonaPart_JuanManuel_Fernandez
     protected Cinturo cinturo;
