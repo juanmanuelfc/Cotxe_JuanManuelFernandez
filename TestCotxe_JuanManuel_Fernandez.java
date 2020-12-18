@@ -28,21 +28,30 @@ public class TestCotxe_JuanManuel_Fernandez {
         }*/
 
         //-------PARTE 2
-        CotxeSegonaPart_JuanManuel_Fernandez c2 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Focus RS", TipusCanvi.CanviAutomatic, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
+        CotxeSegonaPart_JuanManuel_Fernandez c2 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Focus RS", TipusCanvi.CanviManual, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
         try {
-            System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxaAutomatic('+');
-            System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxaAutomatic('-');
-            System.out.println(c2.getMarxaAutomatic());
-            c2.canviarMarxaAutomatic('-');
-            System.out.println(c2.getMarxaAutomatic());
+            c2.arrancarMotor();
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('-');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('-');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('+');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('+');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('+');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('+');
+            System.out.println(c2.getMarxaManual());
+            c2.canviarMarxaManual('+');
+            System.out.println(c2.getMarxaManual());
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        CotxeSegonaPart_JuanManuel_Fernandez c3 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Mustang", TipusCanvi.CanviManual, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
+        /*CotxeSegonaPart_JuanManuel_Fernandez c3 = new CotxeSegonaPart_JuanManuel_Fernandez("Ford", "Mustang", TipusCanvi.CanviManual, EstatsMotorCotxe.Aturat, CanviMarxesAutomatic.N, CanviMarxesManual.N, Cinturo.NoFermat);
         try {
             c3.fermarCinturo();
             System.out.println(c3.getCinturo());
@@ -60,6 +69,6 @@ public class TestCotxe_JuanManuel_Fernandez {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 }

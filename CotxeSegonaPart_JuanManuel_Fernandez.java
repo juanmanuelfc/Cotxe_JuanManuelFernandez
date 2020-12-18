@@ -14,113 +14,80 @@ com a enum, tal i com vérem a l’exercici anterior.
 */
 
 public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Fernandez{
-    protected CanviMarxesAutomatic marxaAutomatic;
-    protected CanviMarxesManual marxaManual;
+    //Atributos de la clase CotxeSegonaPart_JuanManuel_Fernandez
     protected Cinturo cinturo;
+    protected int contadorAutomatic = 1;
+    protected int contadorManual = 1;
+    protected CanviMarxesAutomatic marxesAutomatic = CanviMarxesAutomatic.N;
+    protected CanviMarxesManual marxesManual = CanviMarxesManual.N;
 
     public CotxeSegonaPart_JuanManuel_Fernandez(String marca, String model, TipusCanvi tipuscanvi, EstatsMotorCotxe estatCotxe, CanviMarxesAutomatic marxaAutomatic, CanviMarxesManual marxaManual, Cinturo cinturo){
         super(marca, model, tipuscanvi, estatCotxe);
         this.cinturo = cinturo;
-        /*
-        Farem un if dins el constructor per a que si el cotxe es automàtic,
-        les marxes manuals quedaran nules, i a l'inreves.
-        */
-        if (tipuscanvi == TipusCanvi.CanviAutomatic){
-            this.marxaAutomatic = marxaAutomatic;
-            this.marxaManual = null;
-        }
-        else {
-            this.marxaAutomatic = null;
-            this.marxaManual = marxaManual;
-        }
     }
 
+    //Metodo para subir y bajar marchas en los coches automaticos.
+    //Comprobaciones de coche en marcha, comprobacion del tipo de coche y comprobaciones marcha minima y maxima.
     public void canviarMarxaAutomatic(char marxa) throws Exception {
-        /*
-        ************
-        ------------CANVI AUTOMATIC
-        ************
-        *
-        Primer feim una condició de que el cotxe ha de estar encés, si no es podrà canviar
-        de marxa.
-        *
-        Feim una serie de IF per a recorrer l'enum del tipus de marxa corresponent, en aquest cas
-        del canvi automàtic, pujant i baixant passant un + o - de parametre.
-        */
-        if (this.estatCotxe == EstatsMotorCotxe.EnMarxa){
-            if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.R && marxa == '+') {
-                this.marxaAutomatic = CanviMarxesAutomatic.N;
-            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '+') {
-                this.marxaAutomatic = CanviMarxesAutomatic.F;
-            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.F && marxa == '-') {
-                this.marxaAutomatic = CanviMarxesAutomatic.N;
-            } else if (tipuscanvi == TipusCanvi.CanviAutomatic && marxaAutomatic == CanviMarxesAutomatic.N && marxa == '-') {
-                this.marxaAutomatic = CanviMarxesAutomatic.R;
+        if (estatCotxe == EstatsMotorCotxe.EnMarxa){
+            if (this.tipuscanvi == TipusCanvi.CanviAutomatic){
+                CanviMarxesAutomatic[] marxaAutomatic = {CanviMarxesAutomatic.R, CanviMarxesAutomatic.N, CanviMarxesAutomatic.F};
+                if (marxa == '+'){
+                    if (getMarxaAutomatic() == marxaAutomatic[marxaAutomatic.length - 1])
+                    throw new Exception("Marcha automatica maxima.");
+                    else {
+                        this.contadorAutomatic++;
+                        this.marxesAutomatic = marxaAutomatic[this.contadorAutomatic];
+                    }
+                }
+                if (marxa == '-'){
+                    if (getMarxaAutomatic() == marxaAutomatic[0])
+                    throw new Exception("Marcha automatica minima.");
+                    else {
+                        this.contadorAutomatic--;
+                        this.marxesAutomatic = marxaAutomatic[this.contadorAutomatic];
+                    }
+                }
+            } else {
+                throw new Exception("El coche no es automatico.");
             }
-            else {
-                throw new Exception("Marxa no identificada");
-            }
-        }
-        else {
-            throw new Exception("El cotxe no està encés.");
+        } else {
+            throw new Exception("El coche no esta en marcha.");
         }
     }
 
+    //Metodo para subir y bajar marchas en los coches manuales.
+    //linea 30
     public void canviarMarxaManual(char marxa) throws Exception {
-        /*
-        ************
-        ------------CANVI MANUAL
-        ************
-        *
-        Mateixa primera condició que en el canvi de marxes manual, COMPROVACIÓ DE COTXE ENCÉS.
-        *
-        Feim una serie de IF per a recorrer la l'enum del tipus de marxa en aquest cas
-        del canvi manual, pujant i baixant passant un + o - per parametre.
-        */
-        if (this.estatCotxe == EstatsMotorCotxe.EnMarxa){
-            if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.R && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.N;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Primera;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Segona;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Tercera;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Quarta;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Quinta;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '+') {
-                this.marxaManual = CanviMarxesManual.Sexta;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Sexta && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.Quinta;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quinta && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.Quarta;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Quarta && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.Tercera;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Tercera && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.Segona;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Segona && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.Primera;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.Primera && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.N;
-            } else if (tipuscanvi == TipusCanvi.CanviManual && marxaManual == CanviMarxesManual.N && marxa == '-') {
-                this.marxaManual = CanviMarxesManual.R;
+        if (estatCotxe == EstatsMotorCotxe.EnMarxa){
+            if (this.tipuscanvi == TipusCanvi.CanviManual){
+                CanviMarxesManual[] marxaManual = {CanviMarxesManual.R, CanviMarxesManual.N, CanviMarxesManual.Primera, CanviMarxesManual.Segona, CanviMarxesManual.Tercera, CanviMarxesManual.Quarta, CanviMarxesManual.Quinta, CanviMarxesManual.Sexta};
+                if (marxa == '+'){
+                    if (getMarxaManual() == marxaManual[marxaManual.length - 1])
+                        throw new Exception("Marcha manual maxima.");
+                    else {
+                        this.contadorManual++;
+                        this.marxesManual = marxaManual[this.contadorManual];
+                    }
+                }
+                if (marxa == '-'){
+                    if (getMarxaManual() == marxaManual[0])
+                        throw new Exception("Marcha manual minima.");
+                    else {
+                        this.contadorManual--;
+                        this.marxesManual = marxaManual[this.contadorManual];
+                    }
+                }
+            } else {
+                throw new Exception("El coche no es manual.");
             }
-            else {
-                throw new Exception("Marxa no identificada.");
-            }
-        }
-        else {
-            throw new Exception("El cotxe no està encés.");
+        } else {
+            throw new Exception("El coche no esta en marcha.");
         }
     }
 
+    //Metodo para abrocharnos el cinturon.
     public void fermarCinturo() throws Exception{
-        /*
-        Farem un mètode per fermar-nos el cinturó de seguretat, fent una condició de que si
-        el cinturó no està fermat, el fermarem.
-         */
         if (this.cinturo == Cinturo.NoFermat){
             this.cinturo = Cinturo.Fermat;
         }
@@ -129,14 +96,13 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
     }
 
+    //getter del cinturon
     public Cinturo getCinturo(){
         return this.cinturo;
     }
 
+    //Metodo para desabrocharnos el cinturon
     public void desfermarCinturo() throws Exception{
-        /*
-        Mateix mètode de fermar-nos el cinturó de seguretat, pero ara per desfermar.
-         */
         if (this.cinturo == Cinturo.Fermat){
             this.cinturo = Cinturo.NoFermat;
         }
@@ -145,11 +111,13 @@ public class CotxeSegonaPart_JuanManuel_Fernandez extends Cotxe_JuanManuel_Ferna
         }
     }
 
+    //Getter de la marcha manual en la que estamos.
     public CanviMarxesManual getMarxaManual(){
-        return marxaManual;
+        return this.marxesManual;
     }
 
+    //Getter de la marcha automatica en la que estamos
     public CanviMarxesAutomatic getMarxaAutomatic(){
-        return marxaAutomatic;
+        return this.marxesAutomatic;
     }
 }
